@@ -2,7 +2,7 @@ import React from "react";
 
 const DocAI = () => {
     return (
-        <div>
+        <div className="docai">
             <h1>Chatbot Page</h1>
         </div>
     )
