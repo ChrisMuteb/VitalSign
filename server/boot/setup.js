@@ -1,38 +1,50 @@
 const express = require('express')
 
 const app = express()
-const PORT = 8080
+const PORT = 8081
 
 // custom middleware
 const cors = require('cors')
-const session = require('express-session')
+
 
 // Routes
-const authRoutes = require('../routes/auth.routes');
+const testRoute = require('../routes/testServer.routes');
 
-// mysql connection
-try {
-    // string connection to mysql
-} catch (error) {
-    // log an error
-}
+// MySQL connection
+// const db = mysql.createConnection({
+//     host: 'Mysql@localhost:3306',
+//     user: 'root',
+//     password: '65412Muteb',
+//     database: 'vitalSignLogin',
+// });
+
+// db.connect((err) => {
+//     if (err) {
+//         console.error('Error connecting to MySQL database:', err);
+//         throw err;
+//     }
+//     console.log('Connected to MySQL database');
+// });
 
 // middleware
-const registerCoreMiddleware = async () => {
-    try {
-        app.use(cors)
-        app.use(express.json())
-    } catch (error) {
 
+
+// start application
+const startApp = async () => {
+    try {
+        app.use(cors())
+        app.use(express.json())
+
+        app.use('/testserver', testRoute)
+
+        app.listen(PORT, () => {
+            console.log('Server running on http://127.0.0.1:' + PORT);
+        });
+    } catch (err) {
+        console.log('error while booting the application')
+        throw err;
     }
 
 }
 
-// start application
-const startApp = async () => {
-    app.listen(PORT, () => {
-        // code here
-    })
-}
-
-module.exports = { startApp }
+module.exports = { startApp };
