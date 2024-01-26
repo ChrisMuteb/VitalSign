@@ -1,11 +1,13 @@
+
 import React from "react";
+import SearchBar from "./SearchBar";
 import Navbar from "./Navbar";
 
 const Home = () => {
     return (
         <div className="home">
             <Navbar />
-            <h1>Home Page</h1>
+            <SearchBar />
         </div>
     )
 }
