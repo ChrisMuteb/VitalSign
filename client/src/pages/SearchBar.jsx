@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const SearchBar = () => {
@@ -25,7 +26,9 @@ const SearchBar = () => {
                     onChange={handleChange}
                     className="w-full p-4 bg-white rounded-full"
                 />
-                <button className='text-white bg-blue-950 m-5 p-5 rounded' type="button" onClick={handleSubmit}>Rechercher</button>
+                <button className='text-white bg-blue-950 m-5 p-5 rounded' type="button" onClick={handleSubmit}>
+                    <Link to='/vitalsign/doctorlist'>Rechercher</Link>
+                </button>
             </form>
         </div>
     );
