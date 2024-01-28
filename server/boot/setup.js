@@ -1,14 +1,15 @@
-const express = require('express')
+// const express = require('express');
+// const mysql = require('mysql');
 
-const app = express()
-const PORT = 8081
+// const app = express();
+// const PORT = 3306
 
 // custom middleware
-const cors = require('cors')
+// const cors = require('cors')
 
 
 // Routes
-const testRoute = require('../routes/testServer.routes');
+// const testRoute = require('../routes/testServer.routes');
 
 // MySQL connection
 // const db = mysql.createConnection({
@@ -30,21 +31,21 @@ const testRoute = require('../routes/testServer.routes');
 
 
 // start application
-const startApp = async () => {
-    try {
-        app.use(cors())
-        app.use(express.json())
+// const startApp = async () => {
+//     try {
+//         app.use(cors())
+//         app.use(express.json())
 
-        app.use('/testserver', testRoute)
+//         app.use('/testserver', testRoute)
 
-        app.listen(PORT, () => {
-            console.log('Server running on http://127.0.0.1:' + PORT);
-        });
-    } catch (err) {
-        console.log('error while booting the application')
-        throw err;
-    }
+//         app.listen(PORT, () => {
+//             console.log('Server running on http://127.0.0.1:' + PORT);
+//         });
+//     } catch (err) {
+//         console.log('error while booting the application')
+//         throw err;
+//     }
 
-}
+//  }
 
-module.exports = { startApp };
+//  module.exports = { startApp };
