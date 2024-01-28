@@ -1,21 +1,22 @@
-const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'vitalsign',
-    waitForConnections: true,
-    queueLimit: 0
-  });
-  
-  pool.getConnection((err, connection) => {
-    if (err) {
-      console.error('Error connecting to MySQL:', err)
-      return
-    }
-    console.log('Connected to MySQL database');
-    connection.release();
+const sequelize = new Sequelize('vitalsign', 'root', 'root', {
+  host: 'localhost',
+  dialect: 'mysql',
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
+
+sequelize.authenticate()
+  .then(() => {
+    console.log('CONNECTION ESTABLISHED SUCCESSFULLY.');
+  })
+  .catch(err => {
+    console.error('UNABLE TO CONNECT TO THE DATABASE:', err);
   });
 
-  module.exports = pool
+module.exports = sequelize;
