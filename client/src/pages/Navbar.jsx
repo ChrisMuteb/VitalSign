@@ -1,18 +1,20 @@
 import React from "react";
-import { GiHeartPlus } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
     return (
- 
-        <nav className="navbar w-full flex relative h-20 bg-slate-100 px-4 items-center justify-between text-blue-600">
-            <div className="flex">
-                <GiHeartPlus className="text-red-600 w-10 h-10"/>
-                <h1 className="text-2xl">VitalSign</h1>
+        <nav className="navbar w-full flex fixed top-0 h-20 bg-blue-500 px-4 items-center justify-between text-white z-50">
+            <div className="flex items-center">
+                <h1 className="text-4xl font-extrabold">
+                    <Link to='/vitalsign'>VitalSign</Link>
+                </h1>
             </div>
             <div className="links">
                 <div className="flex items-center space-x-4">
-                    <a href="/" className="bg-blue-600 text-white w-40 text-center">Vous êtes practicien?</a>
-                    <a href="/create" className="bg-blue-600 text-white w-40 text-center">Se Connecter</a>
+                    <Link to="/vitalsign/doctor/register" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">
+                        Vous êtes praticien?</Link>
+                    <Link to="/vitalsign/login" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">Se Connecter</Link>
                 </div>
             </div>
         </nav>

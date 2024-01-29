@@ -25,17 +25,17 @@ const Practicien = () => {
             password,
         }
 
-        axios.post("/vitalsign/doctor/register",data)
-        .then((response)=>{
-            console.log("Inscrivez-vous avec succès",response);
-        }).catch((error)=>{
-            console.log("Échec de l'enregistrement",error);
-        })
+        axios.post("/vitalsign/doctor/register", data)
+            .then((response) => {
+                console.log("Inscrivez-vous avec succès", response);
+            }).catch((error) => {
+                console.log("Échec de l'enregistrement", error);
+            })
     }
 
     return (
         <div className="practicien">
-            <Navbar className="relative"/>
+            <Navbar className="relative" />
             <div className="relative container w-3/5 mx-auto px-4 py-8 border mt-12 rounded-2xl">
                 <div className="text-center text-3xl font-bold py-4 rounded-xl shadow-md">
                     <h1>S'inscrire</h1>
