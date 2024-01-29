@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('vitalsign', 'root', 'root', {
+const sequelize = new Sequelize('vitalsigndb', 'root', '65412Muteb', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {

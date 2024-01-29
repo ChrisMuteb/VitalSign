@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const registerDoctor = require('../services/auth.service').registerDoctor;
-const registerPatient = require('../services/auth.service').registerPatient;
-const login = require('../services/auth.service').login;
-const logOut = require('../services/auth.service').logOut;
+const authServices = require("../services/auth.service");
 
 
-router.post('/doctor/Register', registerDoctor);
-router.post('/patient/Register', registerPatient);
-router.post('/login', login);
-router.post('/logout',logOut);
+router.post('/doctor/register', authServices.registerDoctor);
+router.post('/patient/register', authServices.registerPatient);
+router.post('/login', authServices.login);
+router.post('/logout', authServices.logout);
 
 
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+
 const { User } = require('../user');
 const { Doctor } = require('../doctor');
 const { Patient } = require('../patient');
@@ -12,7 +12,7 @@ const registerDoctor = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
             email,
-            password:hashedPassword,
+            password: hashedPassword,
             firstname,
             lastname,
             role: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase(),
@@ -20,8 +20,8 @@ const registerDoctor = async (req, res) => {
             profile_image_url
         });
         console.log("Here is user: ", user)
-        
-        const doctor = await Doctor.create({ user_id: user.user_id, speciality:speciality });
+
+        const doctor = await Doctor.create({ user_id: user.user_id, speciality: speciality });
         res.status(201).send({ message: 'Doctor created successfully', user });
     } catch (error) {
         console.error('Error creating Doctor:', error);
@@ -73,8 +73,8 @@ const login = async (req, res) => {
     }
 };
 
-const logOut = (req, res) => {
+const logout = (req, res) => {
     res.status(200).send('Logged out successfully');
 };
 
-module.exports = { registerDoctor, registerPatient, login, logOut };
+module.exports = { registerDoctor, registerPatient, login, logout };
