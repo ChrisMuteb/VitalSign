@@ -4,7 +4,7 @@ import { GiHeartPlus } from "react-icons/gi";
 const Navbar = () => {
     return (
  
-        <nav className="navbar w-full flex fixed h-20 bg-slate-100 px-4 items-center justify-between text-blue-600">
+        <nav className="navbar w-full flex relative h-20 bg-slate-100 px-4 items-center justify-between text-blue-600">
             <div className="flex">
                 <GiHeartPlus className="text-red-600 w-10 h-10"/>
                 <h1 className="text-2xl">VitalSign</h1>
