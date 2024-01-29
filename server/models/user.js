@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db');
+const sequelize = require('../config/db');
 
 const User = sequelize.define('user', {
     user_id: {
@@ -29,8 +29,8 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING
     }
 }, {
-  tableName: 'user',
-  timestamps: false
+    tableName: 'user',
+    timestamps: false
 });
 
 User.sync({ force: false })

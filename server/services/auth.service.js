@@ -1,8 +1,8 @@
 const express = require('express');
 
-const { User } = require('../user');
-const { Doctor } = require('../doctor');
-const { Patient } = require('../patient');
+const { User } = require('../models/user');
+const { Doctor } = require('../models/doctor');
+const { Patient } = require('../models/patient');
 const bcrypt = require('bcryptjs');
 
 const registerDoctor = async (req, res) => {
