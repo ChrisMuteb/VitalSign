@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from "./Navbar";
+import { Link } from 'react-router-dom';
+
 
 
 const SeConnecter = () => {
@@ -34,8 +36,8 @@ const SeConnecter = () => {
         <div>
             <Navbar />
             <div className="container w-96 mx-auto px-4 py-8 border mt-12 rounded-2xl">
-                <div className="text-white text-3xl font-bold py-4 rounded-xl shadow-md">
-                    <h1>Se connecter</h1>
+                <div className="text-white text-3xl py-4 rounded-xl shadow-md">
+                    <h1>Je deja un compte</h1>
                 </div>
                 <form onSubmit={handleSubmit} className="py-8">
                     <div className="mb-4">
@@ -67,6 +69,11 @@ const SeConnecter = () => {
                         <button type="submit" className="bg-blue-500 w-full text-white rounded-md py-2 px-4">SE CONNECTER</button>
                     </div>
                 </form>
+
+                <div className="text-white text-3xl py-4 rounded-xl shadow-md">
+                    <p>Nouveau sur VitalSign?</p>
+                    <Link to='/vitalsign/patient/register'>S'INSCRIRE</Link>
+                </div>
             </div>
         </div>
     )

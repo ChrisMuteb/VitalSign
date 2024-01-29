@@ -1,21 +1,26 @@
+// register patient
 import React, { useState } from "react";
 import axios from 'axios';
 import Navbar from "./Navbar";
 
-
-
 const Nouveau = () => {
-    const [username, setUsername] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [dob, setDOB] = useState('');
+    const [insuranceID, setInsuranceID] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = {
-            username,
+            firstname,
+            lastname,
             email,
             password,
+            dob,
+            insuranceID
         };
 
         axios.post('/vitalsign/patient/register', data)
@@ -36,17 +41,23 @@ const Nouveau = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="py-8">
                     <div className="mb-4">
-
                         <input
                             type="text"
-                            id="username"
-                            placeholder="Téléphone portable (sinon fixe)"
-                            value={username} onChange={(e) => setUsername(e.target.value)}
+                            id="firstname"
+                            placeholder="firstname"
+                            value={firstname} onChange={(e) => setFirstname(e.target.value)}
+                            className="rounded-md w-full border-2 border-gray-300 p-2" />
+                    </div>
+                    <div className="mb-4">
+                        <input
+                            type="text"
+                            id="lastname"
+                            placeholder="lastname"
+                            value={lastname} onChange={(e) => setLastname(e.target.value)}
                             className="rounded-md w-full border-2 border-gray-300 p-2" />
                     </div>
 
                     <div className="mb-4">
-
                         <input
                             type="email"
                             id="email"
@@ -56,21 +67,28 @@ const Nouveau = () => {
                     </div>
 
                     <div className="mb-4">
-
                         <input
-                            type="date"
+                            type="password"
                             id="password"
-                            placeholder="Votre date de naissance (JJ/MM/AAAA)"
+                            placeholder="Choisissez un mot de passe"
                             value={password} onChange={(e) => setPassword(e.target.value)}
                             className="rounded-md w-full border-2 border-gray-300 p-2" />
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="passwordConfirm"></label>
                         <input
-                            type="password"
-                            placeholder="Choisissez un mot de passe"
-                            id="passwordConfirm"
+                            type="date"
+                            placeholder="Votre date de naissance (JJ/MM/AAAA)"
+                            id="dob"
+                            value={dob} onChange={(e) => setDOB(e.target.value)}
+                            className="rounded-md w-full border-2 border-gray-300 p-2" />
+                    </div>
+                    <div className="mb-4">
+                        <input
+                            type="text"
+                            id="insuranceID"
+                            placeholder="Votre assurance"
+                            value={insuranceID} onChange={(e) => setInsuranceID(e.target.value)}
                             className="rounded-md w-full border-2 border-gray-300 p-2" />
                     </div>
 
