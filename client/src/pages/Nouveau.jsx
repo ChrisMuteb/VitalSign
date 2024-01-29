@@ -2,6 +2,11 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import Navbar from "./Navbar";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const Nouveau = () => {
     const [firstname, setFirstname] = useState('');
@@ -10,22 +15,30 @@ const Nouveau = () => {
     const [password, setPassword] = useState('');
     const [dob, setDOB] = useState('');
     const [insuranceID, setInsuranceID] = useState('');
+    const [profileImg, setProfileImg] = useState('image/sam.jpg');
+    const [role, setRole] = useState('patient');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = {
-            firstname,
-            lastname,
             email,
             password,
+            firstname,
+            lastname,
             dob,
+            role,
+            profileImg,
             insuranceID
         };
 
-        axios.post('/vitalsign/patient/register', data)
+        axios.post('http://localhost:3001/vitalsign/patient/register', data)
             .then((response) => {
                 console.log('Signup successful:', response);
+                navigate('/vitalsign/patient');
+
             })
             .catch((error) => {
                 console.error('Signup failed:', error);
@@ -102,7 +115,9 @@ const Nouveau = () => {
                         <label htmlFor="acceptConditions" className="text-white">Se souvenir de mon identifiant</label>
                     </div>
 
-                    <button type="submit" className="bg-blue-500 w-full text-white rounded-md py-2 px-4">S'INSCRIRE</button>
+                    <button type="submit" className="bg-blue-500 w-full text-white rounded-md py-2 px-4">
+                        S'INSCRIRE
+                    </button>
                 </form>
 
             </div>

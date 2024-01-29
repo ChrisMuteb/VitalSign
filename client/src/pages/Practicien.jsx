@@ -1,33 +1,43 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import Navbar from "./Navbar";
+import { useNavigate } from 'react-router-dom';
+
 
 const Practicien = () => {
-
-    const [familyName, setFamilyName] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [codePostal, setCodePostal] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [firstname, setFirstName] = useState('');
+    const [codepostal, setCodePostal] = useState('94270');
     const [telephone, setTelephone] = useState('');
     const [speciality, setSpeciality] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('Doctor');
+    const [dob, setDOB] = useState('');
+    const [profileImg, setProfileImg] = useState('img.jpg');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const data = {
-            familyName,
-            firstName,
-            codePostal,
-            telephone,
-            speciality,
             email,
             password,
+            lastname,
+            firstname,
+            codepostal,
+            telephone,
+            role,
+            dob,
+            profileImg,
+            speciality,
         }
 
-        axios.post("/vitalsign/doctor/register", data)
+        axios.post("http://localhost:3001/vitalsign/doctor/register", data)
             .then((response) => {
                 console.log("Inscrivez-vous avec succès", response);
+                navigate('/vitalsign/doctor');
             }).catch((error) => {
                 console.log("Échec de l'enregistrement", error);
             })
@@ -45,16 +55,16 @@ const Practicien = () => {
 
                         <input
                             type="text"
-                            id="familyname"
+                            id="lastname"
                             placeholder="Nom"
-                            value={familyName} onChange={(e) => setFamilyName(e.target.value)}
+                            value={lastname} onChange={(e) => setLastname(e.target.value)}
                             className="relative rounded-md w-60 border-2 border-gray-300 p-2" />
 
                         <input
                             type="text"
-                            id="familyname"
+                            id="firstname"
                             placeholder="Prénom"
-                            value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                            value={firstname} onChange={(e) => setFirstName(e.target.value)}
                             className="relative rounded-md w-60 border-2 border-gray-300 p-2" />
                     </div>
 
@@ -64,7 +74,7 @@ const Practicien = () => {
                             type="text"
                             id="codePostal"
                             placeholder="Code Postal"
-                            value={codePostal} onChange={(e) => setCodePostal(e.target.value)}
+                            value={codepostal} onChange={(e) => setCodePostal(e.target.value)}
                             className="relative rounded-md w-40 border-2 border-gray-300 p-2" />
                         <input
                             type="text"
@@ -73,8 +83,6 @@ const Practicien = () => {
                             value={telephone} onChange={(e) => setTelephone(e.target.value)}
                             className="relative rounded-md w-60 border-2 border-gray-300 p-2" />
                     </div>
-
-
 
                     <div className="mb-4">
                         <input
@@ -100,6 +108,14 @@ const Practicien = () => {
                             value={password} onChange={(e) => setPassword(e.target.value)}
                             className="rounded-md w-full border-2 border-gray-300 p-2" />
                     </div>
+                    <div className="mb-4">
+                        <input
+                            type="date"
+                            placeholder="Votre date de naissance (JJ/MM/AAAA)"
+                            id="dob"
+                            value={dob} onChange={(e) => setDOB(e.target.value)}
+                            className="rounded-md w-full border-2 border-gray-300 p-2" />
+                    </div>
 
                     <div className="mb-4">
                         <input type="checkbox" id="acceptConditions" />
@@ -111,7 +127,10 @@ const Practicien = () => {
                         <label htmlFor="acceptConditions" className="">Se souvenir de mon identifiant</label>
                     </div>
 
-                    <button type="submit" className="bg-blue-500 w-full text-white rounded-md py-2 px-4">S'INSCRIRE</button>
+                    <button type="submit" className="bg-blue-500 w-full text-white rounded-md py-2 px-4">
+                        {/* <Link to='/vitalsign/doctor'>S'INSCRIRE</Link> */}
+                        S'INSCRIRE
+                    </button>
                 </form>
 
             </div>

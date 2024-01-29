@@ -8,6 +8,8 @@ import SeConnecter from './pages/SeConnecter';
 import DocAI from './pages/DocAI';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Practicien from './pages/Practicien';
+import PatientProfile from './pages/PatientProfile';
+import DoctorProfile from './pages/DoctorProfile';
 
 
 
@@ -21,6 +23,9 @@ ReactDOM.render(
       <Route path='/vitalsign/doctorlist' element={<DoctorList />} />
       <Route path='/vitalsign/login' element={<SeConnecter />} />
       <Route path='/vitalsign/docai' element={<DocAI />} />
+      <Route path='/vitalsign/patient' element={<PatientProfile />} />
+      <Route path='/vitalsign/doctor' element={<DoctorProfile />} />
+
 
     </Routes>
 

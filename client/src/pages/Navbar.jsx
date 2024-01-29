@@ -12,6 +12,7 @@ const Navbar = () => {
             </div>
             <div className="links">
                 <div className="flex items-center space-x-4">
+                    <Link to="/vitalsign/docai" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">chatAI</Link>
                     <Link to="/vitalsign/doctor/register" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">
                         Vous êtes praticien?</Link>
                     <Link to="/vitalsign/login" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">Se Connecter</Link>

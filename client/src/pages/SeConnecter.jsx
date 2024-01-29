@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from "./Navbar";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const SeConnecter = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,14 +20,11 @@ const SeConnecter = () => {
             password,
         };
 
-        axios.post('/vitalsign/login', data)
+        axios.post('http://localhost:3001/vitalsign/login', data)
             .then((response) => {
-                if (response.data.success) {
-                    // Redirect to the logged-in page
-                    window.location.href = '/dashboard';
-                } else {
-                    alert('Invalid email or password');
-                }
+                navigate('/vitalsign/patient');
+                console.log('successful login ', response)
+
             })
             .catch((error) => {
                 console.error('Login failed:', error);
@@ -72,7 +72,7 @@ const SeConnecter = () => {
 
                 <div className="text-white text-3xl py-4 rounded-xl shadow-md">
                     <p>Nouveau sur VitalSign?</p>
-                    <Link to='/vitalsign/patient/register'>S'INSCRIRE</Link>
+                    S'INSCRIRE
                 </div>
             </div>
         </div>
