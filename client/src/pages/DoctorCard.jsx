@@ -4,11 +4,9 @@ import React, { useEffect, useState } from "react";
 import { RxAvatar } from "react-icons/rx";
 import { compareTimeOnly } from "../utils/DateTime";
 
-const DoctorCard = (doctor_id, name, speciality,address)=>{
-
-    name = "Doctor Name";
-    speciality = "Dentiste";
-    address = "35 rue Voltare, 72200 Torcy";
+const DoctorCard = (props)=>{
+  
+    const {doctor_id,name,speciality,address} = props;
 
     const [appointments,setAppointment] = useState([]);
     /*const getAppointment = async()=>{
@@ -41,7 +39,6 @@ const DoctorCard = (doctor_id, name, speciality,address)=>{
                 });
             }
         }
-        console.log(dateTimeArray);
         //getAppointment();
         appointment = ["2024-01-30 12:00","2024-01-30 10:30"];
         appointment.forEach((timeSlot)=>{
@@ -59,7 +56,6 @@ const DoctorCard = (doctor_id, name, speciality,address)=>{
 
     const displayAppointment = ()=>{
         const availableAppointment = createAvailableAppointment();
-        console.log(availableAppointment);
         //create header
         const headerDateTime = [];
         const today = moment();
@@ -70,13 +66,11 @@ const DoctorCard = (doctor_id, name, speciality,address)=>{
                 headerDateTime.push(dateTimeString);
             }
         }
-        console.log(headerDateTime);
         
         
           
         // Sort the dateTimeArray based on time only
         const sortedDateTimeArray = availableAppointment.sort(compareTimeOnly);
-        console.log(sortedDateTimeArray);
 
         const displayCol = (item,time,available)=>{
             if(item["time"]===time){
