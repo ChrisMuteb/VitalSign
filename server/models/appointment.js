@@ -4,7 +4,7 @@ const Doctor = require("./doctor");
 const Patient = require("./patient");
 
 const Appointment = sequelize.define(
-  "Appointment",
+  "appointment",
   {
     appointment_id: {
       type: DataTypes.INTEGER,
@@ -17,7 +17,7 @@ const Appointment = sequelize.define(
       type: DataTypes.INTEGER,
     },
     start_time: {
-      type: DataTypes.Time,
+      type: DataTypes.DATE,
     },
   },
   {
@@ -34,6 +34,6 @@ Appointment.sync({ force: false })
     console.error("Error creating appointment table", err);
   });
 
-Appointment.belongsTo(Doctor, { foreignKey: "user_id" });
-Appointment.belongsTo(Patient, { foreignKey: "user_id" });
+//Appointment.belongsTo(Doctor, { foreignKey: "user_id" });
+//Appointment.belongsTo(Patient, { foreignKey: "user_id" });
 module.exports = { Appointment };

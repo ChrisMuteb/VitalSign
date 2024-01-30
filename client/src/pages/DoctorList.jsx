@@ -59,11 +59,14 @@ const DoctorList = (keyword)=>{
 
 
     return (
-        <div className='DoctorList'>
+        <div className='DoctorList item-center'>
             <Navbar/>
-            <div className="relative">
-                {displayDoctorList}
+            <div className="place-items-center">
+                <div className="relative w-4/5">
+                    {displayDoctorList}
+                </div>
             </div>
+            
 
         </div>
 

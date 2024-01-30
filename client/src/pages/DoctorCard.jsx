@@ -9,19 +9,21 @@ const DoctorCard = (props)=>{
     const {doctor_id,name,speciality,address} = props;
 
     const [appointments,setAppointment] = useState([]);
-    /*const getAppointment = async()=>{
-        const res = await axios.get("vitalsign/appointment",
+    const getAppointment = async()=>{
+        const res = await axios.get("http://127.0.0.1:3001/vitalsign/appointment",
         {params:{
-            user_id: doctor_id
+            doctor_id: doctor_id
         }}).then((response)=>{
             setAppointment(response.data);
-            console.log(appointments);
+            console.log(response.data);
         }).catch((err)=>{
             console.error("Can't get appointment",err);
-        })
-    }*/
+        });
+        console.log("appointment",appointments);
+    }
 
-    const createAvailableAppointment = (appointment)=>{
+    const createAvailableAppointment = ()=>{
+        //create a schedule
         const dateTimeArray = [];
         const today = moment();
         for(let i = 0; i < 7; i++){
@@ -39,17 +41,25 @@ const DoctorCard = (props)=>{
                 });
             }
         }
-        //getAppointment();
-        appointment = ["2024-01-30 12:00","2024-01-30 10:30"];
-        appointment.forEach((timeSlot)=>{
-            const [date, time] = timeSlot.split(" ");
 
-            dateTimeArray.forEach((item)=>{
-                if(item["date"] === date && item["time"] === time){
-                    item["available"] = false;
-                }
+        
+        //compare to appointment to hide unavailable appointment
+        if(appointments){
+            appointments.forEach((appointment)=>{
+                console.log("appointment",appointment.start_time);
+                const timeString = moment.utc(appointment.start_time).format('YYYY-MM-DD HH:mm');
+                console.log("timeString",timeString);
+                const [date, time] = timeString.split(" ");
+
+                console.log("appointment date time",date,time);
+    
+                dateTimeArray.forEach((item)=>{
+                    if(item["date"] === date && item["time"] === time){
+                        item["available"] = false;
+                    }
+                });
             });
-        });
+        }
 
         return dateTimeArray;
     }
@@ -126,13 +136,15 @@ const DoctorCard = (props)=>{
     }
     
     useEffect(()=>{
+        getAppointment();
+        
         displayAppointment();
     },[]);
 
     return (
         <div className="DoctorCard">
             <div className="flex relative my-4 mx-4 bg-slate-100">
-                <div className="flex relative mx-4 my-4 w-">
+                <div className="flex relative mx-4 my-4 w-2/5">
                     <RxAvatar className="h-28 w-28"/>
                     <div>
                         <b className="text-2xl">{name}</b>
