@@ -5,7 +5,7 @@ const { User } = require("../models/user");
 const { Patient } = require("../models/patient");
 const { Doctor } = require("../models/doctor");
 const { Appointment } = require("../models/appointment");
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 
 // fetch availabilities of doctore
 const getAppointments = async (req, res) => {
@@ -23,8 +23,28 @@ const getAppointments = async (req, res) => {
     }
   }
 };
+const getUserAppointments = async (req, res) => {
+  console.log(req);
+  const user_id = req.query.user_id;
+  if (!user_id) {
+    res.status(400).send("Missing parameter");
+  } else {
+    try {
+      const result = await Appointment.findAll({
+        where: {
+          [Op.or]: [{ doctor_id: user_id }, { patient_id: user_id }],
+        },
+      });
+      console.log(result);
+      res.status(200).json(result);
+    } catch (error) {
+      console.error("Error retrieving appointments:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+};
 // booked appointment
-const createAppoiment = async (req, res) => {
+const createAppointment = async (req, res) => {
   const { doctor_id, patient_id, start_time, symptom } = req.body;
   console.log("req body", req.body);
 
@@ -45,4 +65,4 @@ const createAppoiment = async (req, res) => {
   }
 };
 // export
-module.exports = { createAppoiment, getAppointments };
+module.exports = { createAppointment, getAppointments, getUserAppointments };

@@ -11,7 +11,7 @@ const DoctorCard = (props)=>{
 
     const [appointments,setAppointment] = useState([]);
     const getAppointment = async()=>{
-        const res = await axios.get("http://127.0.0.1:3001/vitalsign/appointment",
+        const res = await axios.get("http://127.0.0.1:3001/vitalsign/appointment/doctor",
         {params:{
             doctor_id: doctor_id
         }}).then((response)=>{
@@ -86,7 +86,7 @@ const DoctorCard = (props)=>{
         const displayCol = (item,time,available)=>{
             const patient_id = 15;
             const timeString = item["date"]+"T"+time+":00";
-            const url = `/vitalsign/appointment/${doctor_id}/${patient_id}/${timeString}`;
+            const url = `/vitalsign/appointment/form/${doctor_id}/${patient_id}/${timeString}`;
             if(item["time"]===time){
                 if(available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400">
                     <Link to={url}>{time}</Link>
