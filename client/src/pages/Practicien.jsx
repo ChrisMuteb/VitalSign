@@ -23,9 +23,12 @@ const Practicien = () => {
             speciality,
             email,
             password,
+            role:"Doctor",
         }
 
-        axios.post("/vitalsign/doctor/register", data)
+        console.log(data);
+
+        axios.post("http://127.0.0.1:3001/vitalsign/doctor/register", data)
             .then((response) => {
                 console.log("Inscrivez-vous avec succès", response);
             }).catch((error) => {

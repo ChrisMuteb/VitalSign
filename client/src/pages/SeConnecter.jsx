@@ -14,7 +14,7 @@ const SeConnecter = () => {
             password
         }
         console.log(data);
-        axios.post("/vitalsign/login",data)
+        axios.post("http://127.0.0.1:3001/vitalsign/login",data)
         .then((response)=>{
             console.log("logged in",response);
         })
