@@ -17,9 +17,8 @@ const Navbar = () => {
                         Vous êtes praticien?</Link>
                     <Link to="/vitalsign/login" className="bg-white text-blue-600 px-4 py-2 rounded-full text-center">Se Connecter</Link>
                 </div>
-            </nav>
-        </div>
-        
+            </div>
+        </nav>
     );
 }
 

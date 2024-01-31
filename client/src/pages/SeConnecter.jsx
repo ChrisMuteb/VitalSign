@@ -8,13 +8,10 @@ const SeConnecter = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-
-    const [username,setUserName] = useState('');
-
     const handleSubmit = (e)=>{
         e.preventDefault();
         const data = {
-            username,
+            email,
             password
         }
         console.log(data);
@@ -50,9 +47,9 @@ const SeConnecter = () => {
                         <div className="mb-4">
                             <input
                                 type="text"
-                                id="familyname"
-                                placeholder="Username"
-                                value={username} onChange={(e) => setUserName(e.target.value)}
+                                id="Email"
+                                placeholder="Email"
+                                value={email} onChange={(e) => setEmail(e.target.value)}
                                 className="rounded-md w-60 border-2 border-gray-300 p-2" />
                         </div>
 
