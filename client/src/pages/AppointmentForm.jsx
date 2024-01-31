@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
 import moment from "moment";
+import { useParams } from "react-router-dom";
 
-const AppointmentForm = (props)=>{
+const AppointmentForm = ()=>{
 
-    const {patient_id,doctor_id,start_time} = props;
+    const {patient_id,doctor_id,start_time} = useParams();
 
     const [patient,setPatient]=useState('');
     const [doctor,setDoctor]=useState('');
@@ -48,8 +49,8 @@ const AppointmentForm = (props)=>{
     }
 
     const doctorData = {
-        doctor_id: "3",
-        name:"Paul",
+        doctor_id: doctor_id,
+        name:doctor_id,
         speciality: "dentiste",
         address: "30 rue Tolbiac, 76500, Paris"
     }
@@ -59,7 +60,7 @@ const AppointmentForm = (props)=>{
         //getPatient();
     },[]);
 
-    const time = new Date('2024-02-01T09:00:00');
+    const time = new Date(start_time);
     console.log(time);
 
     const handleSubmit = async(e)=>{

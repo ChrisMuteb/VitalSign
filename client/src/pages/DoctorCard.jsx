@@ -3,6 +3,7 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { RxAvatar } from "react-icons/rx";
 import { compareTimeOnly } from "../utils/DateTime";
+import { Link } from "react-router-dom";
 
 const DoctorCard = (props)=>{
   
@@ -47,7 +48,7 @@ const DoctorCard = (props)=>{
         if(appointments){
             appointments.forEach((appointment)=>{
                 console.log("appointment",appointment.start_time);
-                const timeString = moment.utc(appointment.start_time).format('YYYY-MM-DD HH:mm');
+                const timeString = moment(appointment.start_time).format('YYYY-MM-DD HH:mm');
                 console.log("timeString",timeString);
                 const [date, time] = timeString.split(" ");
 
@@ -83,8 +84,13 @@ const DoctorCard = (props)=>{
         const sortedDateTimeArray = availableAppointment.sort(compareTimeOnly);
 
         const displayCol = (item,time,available)=>{
+            const patient_id = 15;
+            const timeString = item["date"]+"T"+time+":00";
+            const url = `/vitalsign/appointment/${doctor_id}/${patient_id}/${timeString}`;
             if(item["time"]===time){
-                if(available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400"><a>{time}</a></td>;
+                if(available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400">
+                    <Link to={url}>{time}</Link>
+                    </td>;
                 return <td><hr className=""/></td>;
             }
         }

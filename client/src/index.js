@@ -20,7 +20,10 @@ ReactDOM.render(
       <Route path="/vitalsign/doctorlist" element={<DoctorList />} />
       <Route path="/vitalsign/login" element={<SeConnecter />} />
       <Route path="/vitalsign/docai" element={<DocAI />} />
-      <Route path="/vitalsign/appointment" element={<AppointmentForm />} />
+      <Route
+        path="/vitalsign/appointment/:doctor_id/:patient_id/:start_time"
+        element={<AppointmentForm />}
+      />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
