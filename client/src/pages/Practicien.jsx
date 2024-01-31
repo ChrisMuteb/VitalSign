@@ -36,8 +36,8 @@ const Practicien = () => {
     return (
         <div className="practicien">
             <Navbar className="relative" />
-            <div className="relative container w-3/5 mx-auto px-4 py-8 border mt-12 rounded-2xl">
-                <div className="text-center text-3xl font-bold py-4 rounded-xl shadow-md">
+            <div className="relative container w-3/5 mx-auto px-4 py-8 border mt-12 rounded-2xl bg-slate-200">
+                <div className="text-center text-3xl font-bold py-4 rounded-xl shadow-md bg-slate-100">
                     <h1>S'inscrire</h1>
                 </div>
                 <form onSubmit={handleSubmit} className="py-8">

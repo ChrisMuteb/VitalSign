@@ -25,7 +25,24 @@ const getAppointments = async (req, res) => {
 };
 // booked appointment
 const createAppoiment = async (req, res) => {
-  const { doctor_id, patient_id, start_time } = req.body;
+  const { doctor_id, patient_id, start_time, symptom } = req.body;
+  console.log("req body", req.body);
+
+  try {
+    const appointment = await Appointment.create({
+      doctor_id,
+      patient_id,
+      start_time,
+      symptom,
+    });
+    console.log("appointment", appointment);
+    res
+      .status(201)
+      .send({ message: "Appointment created successfully", appointment });
+  } catch (err) {
+    console.error("Error creating Appointment:", err);
+    res.status(500).send("Internal Server Error For Appointment");
+  }
 };
 // export
 module.exports = { createAppoiment, getAppointments };

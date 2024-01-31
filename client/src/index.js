@@ -8,6 +8,7 @@ import SeConnecter from "./pages/SeConnecter";
 import DocAI from "./pages/DocAI";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Practicien from "./pages/Practicien";
+import AppointmentForm from "./pages/AppointmentForm";
 
 // const root = ReactDOM.createRoot();
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/vitalsign/doctorlist" element={<DoctorList />} />
       <Route path="/vitalsign/login" element={<SeConnecter />} />
       <Route path="/vitalsign/docai" element={<DocAI />} />
+      <Route path="/vitalsign/appointment" element={<AppointmentForm />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

@@ -9,6 +9,7 @@ const Appointment = sequelize.define(
     appointment_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     doctor_id: {
       type: DataTypes.INTEGER,
@@ -18,6 +19,9 @@ const Appointment = sequelize.define(
     },
     start_time: {
       type: DataTypes.DATE,
+    },
+    symptom: {
+      type: DataTypes.STRING,
     },
   },
   {

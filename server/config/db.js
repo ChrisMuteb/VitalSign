@@ -1,22 +1,23 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize('vitalsigndb', 'root', '65412Muteb', {
-  host: 'localhost',
-  dialect: 'mysql',
+const sequelize = new Sequelize("vitalsigndb", "root", "password", {
+  host: "localhost",
+  dialect: "mysql",
   pool: {
     max: 10,
     min: 0,
     acquire: 30000,
-    idle: 10000
-  }
+    idle: 10000,
+  },
 });
 
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => {
-    console.log('CONNECTION ESTABLISHED SUCCESSFULLY.');
+    console.log("CONNECTION ESTABLISHED SUCCESSFULLY.");
   })
-  .catch(err => {
-    console.error('UNABLE TO CONNECT TO THE DATABASE:', err);
+  .catch((err) => {
+    console.error("UNABLE TO CONNECT TO THE DATABASE:", err);
   });
 
 module.exports = sequelize;
