@@ -17,6 +17,7 @@ import DoctorProfile from './pages/DoctorProfile';
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
+      <Route path='/' element={<App />} />
       <Route path='/vitalsign' element={<App />} />
       <Route path='/vitalsign/patient/register' element={<Nouveau />} />
       <Route path='/vitalsign/doctor/register' element={<Practicien />} />
@@ -25,8 +26,6 @@ ReactDOM.render(
       <Route path='/vitalsign/docai' element={<DocAI />} />
       <Route path='/vitalsign/patient' element={<PatientProfile />} />
       <Route path='/vitalsign/doctor' element={<DoctorProfile />} />
-
-
     </Routes>
 
   </BrowserRouter>,
