@@ -1,6 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const authRoutes = require("./routes/auth.routes");
 const appointmentRoutes = require("./routes/appointment.routes");
 
@@ -8,8 +9,14 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/vitalsign", authRoutes);
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ['GET', 'POST', 'PUT']
+}));
+app.use('/vitalsign', authRoutes);
 app.use("/vitalsign/appointment", appointmentRoutes);
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

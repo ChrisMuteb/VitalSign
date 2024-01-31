@@ -6,7 +6,7 @@ const { Patient } = require('../models/patient');
 const bcrypt = require('bcryptjs');
 
 const registerDoctor = async (req, res) => {
-    const { email, password, firstname, lastname, dob, role, profile_image_url, speciality } = req.body;
+    const { email, password, lastname, firstname, codepostal, telephone, role, dob, profile_image_url, speciality } = req.body;
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,7 +21,7 @@ const registerDoctor = async (req, res) => {
         });
         console.log("Here is user: ", user)
 
-        const doctor = await Doctor.create({ user_id: user.user_id, speciality: speciality });
+        const doctor = await Doctor.create({ user_id: user.user_id, speciality: speciality, codepostal: codepostal, telephone: telephone });
         res.status(201).send({ message: 'Doctor created successfully', user });
     } catch (error) {
         console.error('Error creating Doctor:', error);

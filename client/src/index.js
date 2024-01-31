@@ -10,11 +10,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Practicien from "./pages/Practicien";
 import AppointmentForm from "./pages/AppointmentForm";
 import Appointment from "./pages/Appointment";
+import PatientProfile from './pages/PatientProfile';
+import DoctorProfile from './pages/DoctorProfile';
 
 // const root = ReactDOM.createRoot();
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
+
       <Route path="/vitalsign" element={<App />} />
       <Route path="/vitalsign/patient/register" element={<Nouveau />} />
       <Route path="/vitalsign/doctor/register" element={<Practicien />} />
@@ -26,6 +29,8 @@ ReactDOM.render(
         path="/vitalsign/appointment/form/:doctor_id/:patient_id/:start_time"
         element={<AppointmentForm />}
       />
+      <Route path='/vitalsign/patient' element={<PatientProfile />} />
+      <Route path='/vitalsign/doctor' element={<DoctorProfile />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

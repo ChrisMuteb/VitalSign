@@ -9,7 +9,13 @@ const Doctor = sequelize.define('doctor', {
     },
     speciality: {
         type: DataTypes.STRING
-    }
+    },
+    codepostal: {
+        type: DataTypes.STRING
+    },
+    telephone: {
+        type: DataTypes.STRING
+    },
 }, {
     tableName: 'doctor',
     timestamps: false
