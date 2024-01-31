@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const SeConnecter = () => {
     const [email, setEmail] = useState('');
@@ -9,7 +10,6 @@ const SeConnecter = () => {
 
 
     const [username,setUserName] = useState('');
-    const [password,setPassword] = useState('');
 
     const handleSubmit = (e)=>{
         e.preventDefault();
