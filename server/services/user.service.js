@@ -4,7 +4,7 @@ const { User } = require("../models/user");
 const { Doctor } = require("../models/doctor");
 const { Sequelize, Op } = require("sequelize");
 
-const getUser = async (req, res) => {
+const getDoctor = async (req, res) => {
   const user_id = req.query.user_id;
   if (!user_id) {
     res.status(400).send("Missing parameter");
@@ -24,6 +24,24 @@ const getUser = async (req, res) => {
         role: user.role,
         speciality: doctor.speciality,
       };
+      console.log(result);
+      res.status(200).json(result);
+    } catch (error) {
+      console.error("Error retrieving user:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+};
+
+const getPatient = async (req, res) => {
+  const user_id = req.query.user_id;
+  if (!user_id) {
+    res.status(400).send("Missing parameter");
+  } else {
+    try {
+      const result = await User.findOne({
+        where: { user_id: user_id },
+      });
       console.log(result);
       res.status(200).json(result);
     } catch (error) {
@@ -72,4 +90,4 @@ const getDoctors = async (req, res) => {
   }
 };
 // export
-module.exports = { getUser, getDoctors };
+module.exports = { getDoctor, getDoctors, getPatient };
