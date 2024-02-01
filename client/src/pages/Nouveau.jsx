@@ -37,7 +37,7 @@ const Nouveau = () => {
         axios.post('http://localhost:3001/vitalsign/patient/register', data)
             .then((response) => {
                 console.log('Signup successful:', response);
-                navigate('/vitalsign/patient');
+                navigate(`/vitalsign/patient/${response.data.user.user_id}`);
 
             })
             .catch((error) => {

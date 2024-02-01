@@ -1,19 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 
 const Appointment = ()=>{
 
     const {user_id} = useParams();
 
-    let [appointments,setAppointments] = useState([]);
+    const [appointments,setAppointments] = useState([]);
+    const [user,setUser]=useState('');
 
     useEffect(()=>{
         console.log("get appointment");
         getAppointment();
+        getUser();
     },[]);
+
+    const getUser = ()=>{
+        console.log("user_id:",user_id);
+        const res = axios.get("http://127.0.0.1:3001/vitalsign/user/patient",{
+            params:{
+                user_id,
+            }
+        }).then((response)=>{
+            console.log("response:",response.data);
+            setUser(response.data);
+        }).catch((err)=>{
+            console.error("can't get user.",err);
+        })
+    }
 
     const getAppointment = async()=>{
         console.log("it work");
@@ -75,9 +91,29 @@ const Appointment = ()=>{
     });
 
 
+    const appointmentURL = `/vitalsign/appointment/${user.user_id}`;
+    const homeURL = `/vitalsign/patient/${user.user_id}`;
+
+
     return(
         <div className="Appointment">
-            <Navbar className="relative"/>
+            <nav className="navbar w-full flex relative top-0 h-20 bg-blue-500 px-4 items-center justify-between text-white z-50">
+                <div className="flex items-center">
+                    <h1 className="text-4xl font-extrabold">
+                        <Link to={homeURL}>VitalSign</Link>
+                    </h1>
+                </div>
+                <div className="links">
+                    <div className="flex items-center space-x-4">
+                        <Link to="/vitalsign/patient/message" className=" text-white px-4 py-2 rounded-full text-center">Mes messages</Link>
+                        <Link to="/vitalsign/patient/document" className=" text-white px-4 py-2 rounded-full text-center">Mes document</Link>
+                        <Link to={appointmentURL} className=" text-white px-4 py-2 rounded-full text-center">Mes rendez-vous</Link>
+                        <Link to="/vitalsign/login" className=" text-white px-4 py-2 rounded-full text-center">
+                            {user.firstname} {user.lastname}
+                        </Link>
+                    </div>
+                </div>
+            </nav>
             <div className="place-items-center">
                 <div className="relative w-4/5">
                     {displayAppointmentList}

@@ -38,7 +38,7 @@ const Practicien = () => {
         axios.post("http://localhost:3001/vitalsign/doctor/register", data)
             .then((response) => {
                 console.log("Inscrivez-vous avec succès", response);
-                navigate('/vitalsign/doctor');
+                navigate(`/vitalsign/doctor/${response.data.user.user_id}`);
             }).catch((error) => {
                 console.log("Échec de l'enregistrement", error);
             })

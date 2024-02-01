@@ -3,13 +3,15 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { RxAvatar } from "react-icons/rx";
 import { compareTimeOnly } from "../utils/DateTime";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DoctorCard = (props)=>{
   
-    const {doctor_id,name,speciality,telephone} = props;
+    const {patient_id,doctor_id,name,speciality,telephone} = props;
 
     const [appointments,setAppointment] = useState([]);
+
+    const navigate = useNavigate();
     const getAppointment = async()=>{
         const res = await axios.get("http://127.0.0.1:3001/vitalsign/appointment/doctor",
         {params:{
@@ -84,8 +86,11 @@ const DoctorCard = (props)=>{
         const sortedDateTimeArray = availableAppointment.sort(compareTimeOnly);
 
         const displayCol = (item,time,available)=>{
-            const patient_id = 15;
-            const timeString = item["date"]+"T"+time+":00";
+            console.log(patient_id);
+            if(patient_id==="undefined"){
+                navigate(`/vitalsign/login`);
+            }else{
+                const timeString = item["date"]+"T"+time+":00";
             const url = `/vitalsign/appointment/form/${doctor_id}/${patient_id}/${timeString}`;
             if(item["time"]===time){
                 if(available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400">
@@ -93,6 +98,8 @@ const DoctorCard = (props)=>{
                     </td>;
                 return <td><hr className=""/></td>;
             }
+            }
+            
         }
 
         return (
