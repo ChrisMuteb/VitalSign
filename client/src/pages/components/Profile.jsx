@@ -8,7 +8,7 @@ function Profile(props) {
 
     const appointmentURL = `/vitalsign/appointment/${user.user_id}`;
 
-    const displayInformation = ()=>{
+    /*const displayInformation = ()=>{
         if(user.role === "Doctor"){
             console.log("display");
             return(
@@ -24,7 +24,7 @@ function Profile(props) {
                 </div>
         );
         
-    }
+    }*/
 
     return (
         <div className="flex flex-col items-center h-screen">
@@ -44,7 +44,6 @@ function Profile(props) {
                     </div>
                 </div>
             </nav>
-            {displayInformation()}
 
             <SearchBar user_id={user.user_id}/>
             <div className='cards flex space-x-4 p-8 border mt-auto'>

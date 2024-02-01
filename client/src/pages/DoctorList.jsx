@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 const DoctorList = ()=>{
     const {user_id,searchTerm} = useParams();
 
+
     const [doctorList, setDoctorList] = useState([]);
     const [user,setUser]=useState('');
 
@@ -51,7 +52,6 @@ const DoctorList = ()=>{
     }
     useEffect(()=>{
         getDoctorList();
-        getUser();
     },[]);
 
     const appointmentURL = `/vitalsign/appointment/${user.user_id}`;

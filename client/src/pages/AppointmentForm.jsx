@@ -56,6 +56,7 @@ const AppointmentForm = ()=>{
     console.log(time);
 
     const handleSubmit = async(e)=>{
+        e.preventDefault();
 
         const res = await axios.post("http://127.0.0.1:3001/vitalsign/appointment",
         {
@@ -64,8 +65,8 @@ const AppointmentForm = ()=>{
             start_time:time,
             symptom: symptom,
         }).then((response)=>{
-            console.log(response.data);
             navigate(`/vitalsign/patient/${patient_id}`);
+            console.log(response.data);
         }).catch((err)=>{
             console.error("can not book appointment",err);
         });
