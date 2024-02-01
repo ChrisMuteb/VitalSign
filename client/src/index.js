@@ -25,7 +25,7 @@ ReactDOM.render(
       <Route path="/vitalsign/patient/register" element={<Nouveau />} />
       <Route path="/vitalsign/doctor/register" element={<Practicien />} />
       <Route
-        path="/vitalsign/doctorlist/:searchTerm"
+        path="/vitalsign/doctorlist/:searchTerm/:user_id"
         element={<DoctorList />}
       />
       <Route path="/vitalsign/login" element={<SeConnecter />} />

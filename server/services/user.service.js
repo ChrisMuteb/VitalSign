@@ -40,6 +40,7 @@ const getPatient = async (req, res) => {
   } else {
     try {
       const result = await User.findOne({
+        attributes: ["user_id", "firstname", "lastname", "role", "dob"],
         where: { user_id: user_id },
       });
       console.log(result);

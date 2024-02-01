@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+    const {user_id} = props;
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ const SearchBar = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        navigate(`/vitalsign/doctorlist/${searchTerm}`);
+        navigate(`/vitalsign/doctorlist/${searchTerm}/${user_id}`);
         console.log(`Search term: ${searchTerm}`);
     };
 

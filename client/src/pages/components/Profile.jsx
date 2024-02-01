@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchBar from '../SearchBar';
 
 function Profile(props) {
     const {user} = props;
@@ -35,10 +36,7 @@ function Profile(props) {
                 </div>
                 <div className="links">
                     <div className="flex items-center space-x-4">
-                        <Link to="/vitalsign/patient/message" className=" text-white px-4 py-2 rounded-full text-center">Mes messages</Link>
-                        <Link to="/vitalsign/patient/rendez_vous" className=" text-white px-4 py-2 rounded-full text-center">
-                            Mes rendez-vous</Link>
-                        <Link to="/vitalsign/patient/document" className=" text-white px-4 py-2 rounded-full text-center">Mes document</Link>
+                        <Link to="http://localhost:3500/" className=" text-white px-4 py-2 rounded-full text-center">Mes messages</Link>
                         <Link to={appointmentURL} className=" text-white px-4 py-2 rounded-full text-center">Mes rendez-vous</Link>
                         <Link to="/vitalsign/login" className=" text-white px-4 py-2 rounded-full text-center">
                             {user.firstname} {user.lastname}
@@ -48,6 +46,7 @@ function Profile(props) {
             </nav>
             {displayInformation()}
 
+            <SearchBar user_id={user.user_id}/>
             <div className='cards flex space-x-4 p-8 border mt-auto'>
                 <div className='card bg-white p-4 rounded-lg shadow-md'>
                     <img src="./vaccine2.jpeg" alt="Vaccine" className="w-full h-40 object-cover rounded-t-lg" />
