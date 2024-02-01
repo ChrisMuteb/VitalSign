@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Profile from './components/Profile'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { Link, useParams } from 'react-router-dom';
 import SearchBar from './SearchBar';
@@ -35,22 +37,7 @@ const PatientProfile = ()=>{
         }
     }
     return (
-        <div className='PatientProfile'>
-            <Navbar/>
-            <div className='relative w-full'>
-                <div className='relative bg-slate-200 my-4 shadow-md'>
-                    <h1 className='text-1xl'>Name: {user.firstname+user.lastname}</h1>
-                    <h1 className='text-1xl'>Email: {user.email}</h1>
-                    {displayDoctor()}
-
-                </div>
-                <div className='flex relative bg-slate-200 my-4 shadow-md'>
-                    <Link to="./message" className='text-1xl bg-blue-200 my-4 mx-4 shadow-md'> Mes méssages</Link>
-                    <Link to="./appointment" className='text-1xl bg-blue-200 my-4 mx-4 shadow-md'> Mes rendez-vous</Link>
-                </div>
-                <SearchBar/>
-            </div>
-        </div>
+        <Profile />
     )
 }
 
