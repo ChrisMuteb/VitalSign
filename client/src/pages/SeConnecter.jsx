@@ -32,7 +32,7 @@ const SeConnecter = () => {
 
         axios.post('http://localhost:3001/vitalsign/login', data)
             .then((response) => {
-                navigate('/vitalsign/patient');
+                navigate(`/vitalsign/patient/${response.data.user.user_id}`);
                 console.log('successful login ', response)
 
             })

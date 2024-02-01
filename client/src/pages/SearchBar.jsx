@@ -1,9 +1,11 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
@@ -11,6 +13,8 @@ const SearchBar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        navigate(`/vitalsign/doctorlist/${searchTerm}`);
         console.log(`Search term: ${searchTerm}`);
     };
 

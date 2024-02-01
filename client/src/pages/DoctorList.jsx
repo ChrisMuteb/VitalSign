@@ -2,43 +2,24 @@ import React, { useEffect, useState } from 'react'
 import DoctorCard from './DoctorCard'
 import Navbar from './Navbar'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
-const DoctorList = (keyword)=>{
+const DoctorList = ()=>{
+    const {searchTerm} = useParams();
 
     const [doctorList, setDoctorList] = useState([]);
 
     const getDoctorList =()=>{
-        /*axios.get("/vitalsign/doctors",{params:{
-            "keyword": keyword
+        axios.get("http://127.0.0.1:3001/vitalsign/user/search/doctor",{params:{
+            keyword: searchTerm
         }})
         .then((response)=>{
             console.log(response);
+            setDoctorList(response.data);
         })
         .catch((err)=>{
             console.error("Can't get doctor list", err);
-        })*/
-        const data = [
-            {
-                doctor_id: "1",
-                name:"John",
-                speciality: "dentiste",
-                address: "15 rue Voltaire, 75000, Creteil"
-            },
-            {
-                doctor_id: "2",
-                name:"Fiona",
-                speciality: "dentiste",
-                address: "19 rue National, 77500, Kremlin-Bicêtre"
-            },
-            {
-                doctor_id: "3",
-                name:"Paul",
-                speciality: "dentiste",
-                address: "30 rue Tolbiac, 76500, Paris"
-            },
-        ];
-
-        setDoctorList(data)
+        })
         
     }
 
@@ -50,7 +31,7 @@ const DoctorList = (keyword)=>{
             doctor_id={doctor.doctor_id}
             name = {doctor.name}
             speciality = {doctor.speciality}
-            address = {doctor.address}
+            telephone = {doctor.telephone}
         />}
     )
     useEffect(()=>{

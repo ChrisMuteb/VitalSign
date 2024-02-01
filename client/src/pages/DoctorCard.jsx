@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const DoctorCard = (props)=>{
   
-    const {doctor_id,name,speciality,address} = props;
+    const {doctor_id,name,speciality,telephone} = props;
 
     const [appointments,setAppointment] = useState([]);
     const getAppointment = async()=>{
@@ -155,7 +155,7 @@ const DoctorCard = (props)=>{
                     <div>
                         <b className="text-2xl">{name}</b>
                         <h1 className="text-xl">Speciality: {speciality}</h1>
-                        <h1 className="text-xl">{address}</h1>
+                        <h1 className="text-xl">Telephone: {telephone}</h1>
                     </div>
                 </div>
                 <div className="flex relative my-4 mx-4 w-full">
