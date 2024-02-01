@@ -26,12 +26,13 @@ function Profile(props) {
         
     }*/
 
+    const homeURL = `/vitalsign/patient/${user.user_id}`;
     return (
         <div className="flex flex-col items-center h-screen">
             <nav className="navbar w-full flex fixed top-0 h-20 bg-blue-500 px-4 items-center justify-between text-white z-50 relative">
                 <div className="flex items-center">
                     <h1 className="text-4xl font-extrabold">
-                        <Link to='/vitalsign'>VitalSign</Link>
+                        <Link to={homeURL}>VitalSign</Link>
                     </h1>
                 </div>
                 <div className="links">
