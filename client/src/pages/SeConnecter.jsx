@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+
+
+
+
+
 import axios from "axios";
+
 
 const SeConnecter = () => {
     const [email, setEmail] = useState('');
@@ -66,10 +74,16 @@ const SeConnecter = () => {
                     </div>
                     
                 </form>
-                <div className="text-white text-3xl py-4 rounded-xl shadow-md">
+
+
+                <Link to="/vitalsign/patient/register" >
+                  <div className="text-white text-3xl py-4 rounded-xl shadow-md">
+
+                
+
                     <p>Nouveau sur VitalSign?</p>
                     S'INSCRIRE
-                </div>
+                </div></Link>
             </div>
         </div>
     )
