@@ -10,6 +10,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Practicien from './pages/Practicien';
 import PatientProfile from './pages/PatientProfile';
 import DoctorProfile from './pages/DoctorProfile';
+import Message from './pages/Message';
+import RendezVous from './pages/components/RendezVous';
+import Documents from './pages/Documents';
 
 
 
@@ -26,6 +29,10 @@ ReactDOM.render(
       <Route path='/vitalsign/docai' element={<DocAI />} />
       <Route path='/vitalsign/patient' element={<PatientProfile />} />
       <Route path='/vitalsign/doctor' element={<DoctorProfile />} />
+      <Route path='/vitalsign/patient/message' element={<Message />} />
+      <Route path='/vitalsign/patient/rendez_vous' element={<RendezVous />} />
+      <Route path='/vitalsign/patient/document' element={<Documents />} />
+
     </Routes>
 
   </BrowserRouter>,

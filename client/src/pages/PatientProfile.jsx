@@ -1,8 +1,9 @@
 import React from 'react'
+import Profile from './components/Profile'
 
 function PatientProfile() {
     return (
-        <div>PatientProfile</div>
+        <Profile />
     )
 }
 
