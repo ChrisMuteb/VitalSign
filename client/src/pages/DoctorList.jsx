@@ -52,6 +52,7 @@ const DoctorList = ()=>{
     }
     useEffect(()=>{
         getDoctorList();
+        getUser();
     },[]);
 
     const appointmentURL = `/vitalsign/appointment/${user.user_id}`;
