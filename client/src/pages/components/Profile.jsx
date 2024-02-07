@@ -10,7 +10,7 @@ function Profile(props) {
 
     const appointmentURL = `/vitalsign/appointment/${user.user_id}`;
 
-    console.log('user: ', user)
+    console.log('user: ', user.user_id)
 
     // const homeURL = `/vitalsign/patient/${user.user_id}`;
     return (
@@ -23,7 +23,11 @@ function Profile(props) {
                 </div>
                 <div className="links">
                     <div className="flex items-center space-x-4">
-                        <Link to="http://localhost:3500/" className=" text-white px-4 py-2 rounded-full text-center">Mes messages</Link>
+                        <Link to={{
+                            pathname: user.role === 'Doctor' ? "/vitalsign/doctor/message" : '/vitalsign/patient/message',
+                            state: `${user.firstname}`
+                        }}
+                            className=" text-white px-4 py-2 rounded-full text-center">Mes messages</Link>
                         <Link to={appointmentURL} className=" text-white px-4 py-2 rounded-full text-center">Mes rendez-vous</Link>
                         <Link to="/vitalsign/login" className=" text-white px-4 py-2 rounded-full text-center">
                             {user.firstname} {user.lastname}

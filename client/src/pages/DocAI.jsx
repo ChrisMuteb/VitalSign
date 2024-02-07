@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from 'react';
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 import axios from 'axios';
 import TypingAnimation from "./components/TypingAnimation";
 import NavbarLogoUser from "./components/NavbarLogoUser";
@@ -42,28 +44,31 @@ const DocAI = () => {
                     <h2 className='bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text text-center py-3 font-bold text-6xl'>
                         VitalSign DocAI
                     </h2>
-
                     <div className='flex-grow p-6 border rounded-xl'>
                         <div className='flex flex-col space-y-4'>
-                            {
-                                chatLog.map((message, index) => (
-                                    <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'
-                                        }`}>
-                                        <div className={`${message.type === 'user' ? 'bg-purple-500' : 'bg-gray-800'
-                                            } rounded-lg p-4 text-white max-w-sm`}>
-                                            {message.message}
+                            <ScrollToBottom className="message-container">
+
+                                {
+                                    chatLog.map((message, index) => (
+                                        <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'
+                                            }`}>
+                                            <div className={`${message.type === 'user' ? 'bg-purple-500' : 'bg-gray-800'
+                                                } rounded-lg p-4 text-white max-w-sm`}>
+                                                {message.message}
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                                {
+                                    isLoading &&
+                                    <div key={chatLog.length} className='flex justify-start'>
+                                        <div className='bg-gray-800 rounded-lg p-4 text-white max-w-sm'>
+                                            <TypingAnimation />
                                         </div>
                                     </div>
-                                ))
-                            }
-                            {
-                                isLoading &&
-                                <div key={chatLog.length} className='flex justify-start'>
-                                    <div className='bg-gray-800 rounded-lg p-4 text-white max-w-sm'>
-                                        <TypingAnimation />
-                                    </div>
-                                </div>
-                            }
+                                }
+                            </ScrollToBottom>
+
                         </div>
                     </div>
 

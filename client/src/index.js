@@ -41,6 +41,7 @@ ReactDOM.render(
         path="/vitalsign/appointment/form/:doctor_id/:patient_id/:start_time"
         element={<AppointmentForm />}
       />
+      <Route path="/vitalsign/doctor/message" element={<Message />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
