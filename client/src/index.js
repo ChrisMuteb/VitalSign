@@ -25,9 +25,10 @@ ReactDOM.render(
       <Route path="/vitalsign/patient/register" element={<Nouveau />} />
       <Route path="/vitalsign/doctor/register" element={<Practicien />} />
       <Route
-        path="/vitalsign/doctorlist/:searchTerm/:user_id"
+        path="/vitalsign/doctorlist/:searchTerm"
         element={<DoctorList />}
       />
+      {/* <Route path="/vitalsign/doctorlist" element={<DoctorList />} /> */}
       <Route path="/vitalsign/login" element={<SeConnecter />} />
       <Route path="/vitalsign/docai" element={<DocAI />} />
       <Route path="/vitalsign/patient/:user_id" element={<PatientProfile />} />
@@ -40,6 +41,7 @@ ReactDOM.render(
         path="/vitalsign/appointment/form/:doctor_id/:patient_id/:start_time"
         element={<AppointmentForm />}
       />
+      <Route path="/vitalsign/doctor/message" element={<Message />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

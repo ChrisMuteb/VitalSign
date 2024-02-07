@@ -4,79 +4,79 @@ import axios from "axios";
 import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 
-const AppointmentForm = ()=>{
+const AppointmentForm = () => {
 
 
-    const {patient_id,doctor_id,start_time} = useParams();
-    console.log("params",patient_id,doctor_id,start_time);
+    const { patient_id, doctor_id, start_time } = useParams();
+    console.log("params", patient_id, doctor_id, start_time);
 
-    const [patient,setPatient]=useState('');
-    const [doctor,setDoctor]=useState('');
+    const [patient, setPatient] = useState('');
+    const [doctor, setDoctor] = useState('');
 
-    const [symptom,setSymptom] = useState('');
+    const [symptom, setSymptom] = useState('');
 
-    const navigate =useNavigate();
+    const navigate = useNavigate();
 
-    const getPatient = async()=>{
+    const getPatient = async () => {
         let user_id = patient_id;
         const res = await axios.get("http://127.0.0.1:3001/vitalsign/user/patient",
-        {
-            params:{
-                user_id,
-            }
-        }).then((response)=>{
-            console.log(response.data);
-            setPatient(response.data);
-        }).catch((err)=>{
-            console.error("Can't get patient",err);
-        });
+            {
+                params: {
+                    user_id,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                setPatient(response.data);
+            }).catch((err) => {
+                console.error("Can't get patient", err);
+            });
     }
 
-    const getDoctor = async()=>{
+    const getDoctor = async () => {
         let user_id = doctor_id;
         const res = await axios.get("http://127.0.0.1:3001/vitalsign/user/doctor",
-        {
-            params:{
-                user_id,
-            }
-        }).then((response)=>{
-            console.log(response.data);
-            setDoctor(response.data);
-        }).catch((err)=>{
-            console.error("Can't get doctor",err);
-        });
+            {
+                params: {
+                    user_id,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                setDoctor(response.data);
+            }).catch((err) => {
+                console.error("Can't get doctor", err);
+            });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getDoctor();
         getPatient();
-    },[]);
+    }, []);
 
     const time = new Date(start_time);
     console.log(time);
 
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const res = await axios.post("http://127.0.0.1:3001/vitalsign/appointment",
-        {
-            doctor_id:doctor.user_id,
-            patient_id:patient.user_id,
-            start_time:time,
-            symptom: symptom,
-        }).then((response)=>{
-            navigate(`/vitalsign/patient/${patient_id}`);
-            console.log(response.data);
-        }).catch((err)=>{
-            console.error("can not book appointment",err);
-        });
+            {
+                doctor_id: doctor.user_id,
+                patient_id: patient.user_id,
+                start_time: time,
+                symptom: symptom,
+            }).then((response) => {
+                navigate(`/vitalsign/patient/${patient_id}`);
+                console.log(response.data);
+            }).catch((err) => {
+                console.error("can not book appointment", err);
+            });
 
-        
+
 
     }
-    return(
+    return (
         <div className="AppointmentForm">
-            <Navbar className="relative"/>
+            <Navbar className="relative" />
             <div className="relative container w-3/5 mx-auto px-4 py-8 border mt-12 rounded-2xl bg-slate-200">
                 <div className="text-center text-3xl font-bold py-4 rounded-xl shadow-md bg-slate-100">
                     <h1>Prendre rendez-vous</h1>
@@ -91,7 +91,7 @@ const AppointmentForm = ()=>{
                             placeholder="Nom"
                             value={patient.firstname}
                             className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
-                        
+
                         <input
                             type="text"
                             id="familyname"
@@ -105,7 +105,7 @@ const AppointmentForm = ()=>{
                             id="symptom"
                             placeholder="Symptômes"
                             value={symptom}
-                            onChange={(e)=>setSymptom(e.target.value)}
+                            onChange={(e) => setSymptom(e.target.value)}
                             className="relative rounded-md w-full h-36 border-2 border-gray-300 p-2" />
                     </div>
                     <label className="text-1xl">Informations sur le rendez-vous</label>
@@ -115,20 +115,20 @@ const AppointmentForm = ()=>{
 
                             <label className="text-1xl mr-2">Nom</label>
                             <input
-                            type="text"
-                            id="doctorname"
-                            placeholder="Nom"
-                            value={doctor.firstname + " " + doctor.lastname}
-                            className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
-                            
-                            <br/>
+                                type="text"
+                                id="doctorname"
+                                placeholder="Nom"
+                                value={doctor.firstname + " " + doctor.lastname}
+                                className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
+
+                            <br />
                             <label className="text-1xl mr-2">Spécialité</label>
                             <input
-                            type="text"
-                            id="speciality"
-                            placeholder="Nom"
-                            value={doctor.speciality}
-                            className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
+                                type="text"
+                                id="speciality"
+                                placeholder="Nom"
+                                value={doctor.speciality}
+                                className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
 
                         </div>
                         <label className="text-1xl">Le rendez-vous commence à</label>
@@ -140,7 +140,7 @@ const AppointmentForm = ()=>{
                             className="relative rounded-md w-60 border-2 border-gray-300 p-2 cursor-not-allowed" />
                     </div>
                     <div className="w-full text-center">
-                        <button type="submit" className="bg-blue-500 w-40 text-white rounded-md py-2 px-4">Prendre rendez-vous</button>
+                        <button type="submit" className="bg-blue-500 w-60 text-white rounded-md py-2 px-4">Prendre rendez-vous</button>
                     </div>
                 </form>
 
