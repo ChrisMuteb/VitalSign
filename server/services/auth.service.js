@@ -1,9 +1,14 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const session = require('express-session');
+// const { unauthorized } = require("../constants/statusCodes");
+
+
 
 const { User } = require('../models/user');
 const { Doctor } = require('../models/doctor');
 const { Patient } = require('../models/patient');
-const bcrypt = require('bcryptjs');
 
 const registerDoctor = async (req, res) => {
     const { email, password, lastname, firstname, codepostal, telephone, role, dob, profile_image_url, speciality } = req.body;
@@ -62,10 +67,18 @@ const login = async (req, res) => {
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
+
         if (passwordMatch) {
-            res.send({ message: 'Login successful', user });
+            const id = user.user_id;
+            console.log(id);
+            const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+                expiresIn: 300, //5min
+            })
+            // req.session.usr = user;// create a session
+
+            res.status(200).send({ auth: true, token: token, result: user });
         } else {
-            res.status(401).send('Incorrect password');
+            res.status(401).send({ auth: false, message: 'Incorrect password' });
         }
     } catch (error) {
         console.error('Error retrieving user:', error);

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const SearchBar = (props) => {
-    const {user_id} = props;
+    const { user_id } = props;
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
@@ -15,7 +15,11 @@ const SearchBar = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        navigate(`/vitalsign/doctorlist/${searchTerm}/${user_id}`);
+
+
+        // navigate(`/vitalsign/doctorlist/${searchTerm}/${user_id}`);
+
+        navigate(`/vitalsign/doctorlist/${searchTerm}`);
         console.log(`Search term: ${searchTerm}`);
     };
 
@@ -32,7 +36,8 @@ const SearchBar = (props) => {
                     className="w-full p-4 bg-white rounded-full"
                 />
                 <button className='text-white bg-blue-950 m-5 p-5 rounded' type="button" onClick={handleSubmit}>
-                    <Link to='/vitalsign/doctorlist'>Rechercher</Link>
+                    {/* <Link to='/vitalsign/doctorlist'>Rechercher</Link> */}
+                    Rechercher
                 </button>
             </form>
         </div>

@@ -3,9 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/auth.routes");
-
 const aiRoutes = require("./routes/ai.routes");
-
 const appointmentRoutes = require("./routes/appointment.routes");
 const userRoutes = require("./routes/user.routes");
 
@@ -17,7 +15,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST"],
   })
 );
 app.use("/vitalsign", authRoutes);

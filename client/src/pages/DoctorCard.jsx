@@ -5,36 +5,38 @@ import { RxAvatar } from "react-icons/rx";
 import { compareTimeOnly } from "../utils/DateTime";
 import { Link, useNavigate } from "react-router-dom";
 
-const DoctorCard = (props)=>{
-  
-    const {patient_id,doctor_id,name,speciality,telephone} = props;
+const DoctorCard = (props) => {
 
-    const [appointments,setAppointment] = useState([]);
-
+    const { patient_id, doctor_id, name, speciality, telephone } = props;
+    // const { doctor_id, name, speciality, telephone } = props;
+    const [appointments, setAppointment] = useState([]);
     const navigate = useNavigate();
-    const getAppointment = async()=>{
+
+    const getAppointment = async () => {
         const res = await axios.get("http://127.0.0.1:3001/vitalsign/appointment/doctor",
-        {params:{
-            doctor_id: doctor_id
-        }}).then((response)=>{
-            setAppointment(response.data);
-            console.log(response.data);
-        }).catch((err)=>{
-            console.error("Can't get appointment",err);
-        });
-        console.log("appointment",appointments);
+            {
+                params: {
+                    doctor_id: doctor_id
+                }
+            }).then((response) => {
+                setAppointment(response.data);
+                console.log(response.data);
+            }).catch((err) => {
+                console.error("Can't get appointment", err);
+            });
+        console.log("appointment", appointments);
     }
 
-    const createAvailableAppointment = ()=>{
+    const createAvailableAppointment = () => {
         //create a schedule
         const dateTimeArray = [];
         const today = moment();
-        for(let i = 0; i < 7; i++){
-            const currentDate = today.clone().add(i,'days');
-            if(![0,6].includes(currentDate.day())){
-                const timeSlots = ['9:00','10:30','12:00','13:30','15:00','16:30'];
+        for (let i = 0; i < 7; i++) {
+            const currentDate = today.clone().add(i, 'days');
+            if (![0, 6].includes(currentDate.day())) {
+                const timeSlots = ['9:00', '10:30', '12:00', '13:30', '15:00', '16:30'];
 
-                timeSlots.forEach((timeSlot)=>{
+                timeSlots.forEach((timeSlot) => {
                     const dateTimeString = {
                         date: `${currentDate.format('YYYY-MM-DD')}`,
                         time: `${timeSlot}`,
@@ -45,19 +47,19 @@ const DoctorCard = (props)=>{
             }
         }
 
-        
+
         //compare to appointment to hide unavailable appointment
-        if(appointments){
-            appointments.forEach((appointment)=>{
-                console.log("appointment",appointment.start_time);
+        if (appointments) {
+            appointments.forEach((appointment) => {
+                console.log("appointment", appointment.start_time);
                 const timeString = moment(appointment.start_time).format('YYYY-MM-DD HH:mm');
-                console.log("timeString",timeString);
+                console.log("timeString", timeString);
                 const [date, time] = timeString.split(" ");
 
-                console.log("appointment date time",date,time);
-    
-                dateTimeArray.forEach((item)=>{
-                    if(item["date"] === date && item["time"] === time){
+                console.log("appointment date time", date, time);
+
+                dateTimeArray.forEach((item) => {
+                    if (item["date"] === date && item["time"] === time) {
                         item["available"] = false;
                     }
                 });
@@ -67,98 +69,98 @@ const DoctorCard = (props)=>{
         return dateTimeArray;
     }
 
-    const displayAppointment = ()=>{
+    const displayAppointment = () => {
         const availableAppointment = createAvailableAppointment();
         //create header
         const headerDateTime = [];
         const today = moment();
-        for(let i = 0; i < 7; i++){
-            const currentDate = today.clone().add(i,'days');
-            if(![0,6].includes(currentDate.day())){
+        for (let i = 0; i < 7; i++) {
+            const currentDate = today.clone().add(i, 'days');
+            if (![0, 6].includes(currentDate.day())) {
                 const dateTimeString = `${currentDate.format('MM/DD')}`;
                 headerDateTime.push(dateTimeString);
             }
         }
-        
-        
-          
+
+
+
         // Sort the dateTimeArray based on time only
         const sortedDateTimeArray = availableAppointment.sort(compareTimeOnly);
 
-        const displayCol = (item,time,available)=>{
+        const displayCol = (item, time, available) => {
             console.log(patient_id);
-            if(patient_id==="undefined"){
+            if (patient_id === "undefined") {
                 navigate(`/vitalsign/login`);
-            }else{
-                const timeString = item["date"]+"T"+time+":00";
-            const url = `/vitalsign/appointment/form/${doctor_id}/${patient_id}/${timeString}`;
-            if(item["time"]===time){
-                if(available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400">
-                    <Link to={url}>{time}</Link>
+            } else {
+                const timeString = item["date"] + "T" + time + ":00";
+                const url = `/vitalsign/appointment/form/${doctor_id}/${patient_id}/${timeString}`;
+                if (item["time"] === time) {
+                    if (available) return <td className="text-center bg-blue-200 rounded-md border-2 hover:bg-blue-400">
+                        <Link to={url}>{time}</Link>
                     </td>;
-                return <td><hr className=""/></td>;
+                    return <td><hr className="" /></td>;
+                }
             }
-            }
-            
+
         }
 
         return (
             <table className="w-full">
-              <thead className="justify-between">
-                <tr>
-                  {headerDateTime.map(header => (
-                    <th key={header} >{header}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"9:00",item["available"])
-                    ))}
-                </tr>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"10:30",item["available"])
-                    ))}
-                </tr>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"12:00",item["available"])
-                    ))}
-                </tr>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"13:30",item["available"])
-                    ))}
-                </tr>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"15:00",item["available"])
-                    ))}
-                </tr>
-                <tr className="">
-                    {sortedDateTimeArray.map((item) => ( 
-                        displayCol(item,"16:30",item["available"])
-                    ))}
-                </tr>
-              </tbody>
+                <thead className="justify-between">
+                    <tr>
+                        {headerDateTime.map(header => (
+                            <th key={header} >{header}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "9:00", item["available"])
+                        ))}
+                    </tr>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "10:30", item["available"])
+                        ))}
+                    </tr>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "12:00", item["available"])
+                        ))}
+                    </tr>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "13:30", item["available"])
+                        ))}
+                    </tr>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "15:00", item["available"])
+                        ))}
+                    </tr>
+                    <tr className="">
+                        {sortedDateTimeArray.map((item) => (
+                            displayCol(item, "16:30", item["available"])
+                        ))}
+                    </tr>
+                </tbody>
             </table>
-          );
+        );
 
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         getAppointment();
-        
+
         displayAppointment();
-    },[]);
+    }, []);
 
     return (
         <div className="DoctorCard">
             <div className="flex relative my-4 mx-4 bg-slate-100">
                 <div className="flex relative mx-4 my-4 w-2/5">
-                    <RxAvatar className="h-28 w-28"/>
+                    <RxAvatar className="h-28 w-28" />
                     <div>
                         <b className="text-2xl">{name}</b>
                         <h1 className="text-xl">Speciality: {speciality}</h1>

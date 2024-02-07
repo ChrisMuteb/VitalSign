@@ -4,56 +4,58 @@ import Navbar from './Navbar'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
-const DoctorList = ()=>{
-    const {user_id,searchTerm} = useParams();
+const DoctorList = () => {
+    // const {user_id,searchTerm} = useParams();
 
-
+    const { searchTerm } = useParams();
     const [doctorList, setDoctorList] = useState([]);
-    const [user,setUser]=useState('');
+    const [user, setUser] = useState('');
 
-    const getDoctorList =()=>{
-        axios.get("http://127.0.0.1:3001/vitalsign/user/search/doctor",{params:{
-            keyword: searchTerm
-        }})
-        .then((response)=>{
-            console.log(response);
-            setDoctorList(response.data);
+    const getDoctorList = () => {
+        axios.get("http://127.0.0.1:3001/vitalsign/user/search/doctor", {
+            params: {
+                keyword: searchTerm
+            }
         })
-        .catch((err)=>{
-            console.error("Can't get doctor list", err);
-        })
-        
+            .then((response) => {
+                console.log(response);
+                setDoctorList(response.data);
+            })
+            .catch((err) => {
+                console.error("Can't get doctor list", err);
+            })
+
     }
 
-    const displayDoctorList = doctorList.map((doctor)=>
-        {
-        console.log("doctor:",doctor);
-        return <DoctorCard 
+    const displayDoctorList = doctorList.map((doctor) => {
+        console.log("doctor:", doctor);
+        return <DoctorCard
             key={doctor.user_id}
             doctor_id={doctor.user_id}
-            patient_id = {user_id}
-            name = {doctor.name}
-            speciality = {doctor.speciality}
-            telephone = {doctor.telephone}
-        />}
+            patient_id={localStorage.getItem('user')}
+            name={doctor.name}
+            speciality={doctor.speciality}
+            telephone={doctor.telephone}
+        />
+    }
     )
-    const getUser = ()=>{
-        console.log("user_id:",user_id);
-        const res = axios.get("http://127.0.0.1:3001/vitalsign/user/patient",{
-            params:{
-                user_id,
+    const getUser = () => {
+        // console.log("user_id:", user_id);
+        const res = axios.get("http://127.0.0.1:3001/vitalsign/user/patient", {
+            params: {
+                // user_id,
             }
-        }).then((response)=>{
-            console.log("response:",response.data);
+        }).then((response) => {
+            console.log("response:", response.data);
             setUser(response.data);
-        }).catch((err)=>{
-            console.error("can't get user.",err);
+        }).catch((err) => {
+            console.error("can't get user.", err);
         })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getDoctorList();
-        getUser();
-    },[]);
+        // getUser();
+    }, []);
 
     const appointmentURL = `/vitalsign/appointment/${user.user_id}`;
 
@@ -80,7 +82,7 @@ const DoctorList = ()=>{
                     {displayDoctorList}
                 </div>
             </div>
-            
+
 
         </div>
 
